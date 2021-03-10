@@ -1,18 +1,16 @@
-version: '3'
+version: "3.8"
 
 services:
 
   web:
-
-    build:./web
-
+    build: ./web
     environment:
       - APACHE_RUN_USER=www-data
     volumes:
-      - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
+      - ${APP_PATH_HOST}: ${APP_PATH_CONTAINER}
     ports:
       - 8080:80
-    working_dir:${APP_PATH_CONTAINER}
+    working_dir: ${APP_PATH_CONTAINER}
 
   db:
     image: mariadb
@@ -20,17 +18,17 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 123456
     volumes:
-      - ${DB_PATH_HOST}:/var/lib/mysql  
+      - ${DB_PATH_HOST}: /var/lib/mysql
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 6080:8080    
+      - 6080:8080
 
   composer:
     image: composer:latest
-    volumes: 
-      - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
+    volumes:
+      - ${APP_PATH_HOST}: ${APP_PATH_CONTAINER}
     working_dir: ${APP_PATH_CONTAINER}
-    command: composer install          
+    command: composer install
