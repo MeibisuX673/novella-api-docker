@@ -7,7 +7,7 @@ services:
     environment:
       - APACHE_RUN_USER=www-data
     volumes:
-      - ${APP_PATH_HOST}: ${APP_PATH_CONTAINER}
+      - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
     ports:
       - 8080:80
     working_dir: ${APP_PATH_CONTAINER}
@@ -18,7 +18,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 123456
     volumes:
-      - ${DB_PATH_HOST}: /var/lib/mysql
+      - ${DB_PATH_HOST}:/var/lib/mysql
 
   adminer:
     image: adminer
@@ -29,6 +29,6 @@ services:
   composer:
     image: composer:latest
     volumes:
-      - ${APP_PATH_HOST}: ${APP_PATH_CONTAINER}
+      - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
     working_dir: ${APP_PATH_CONTAINER}
     command: composer install
